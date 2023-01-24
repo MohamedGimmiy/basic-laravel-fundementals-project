@@ -48,4 +48,42 @@ class BrandController extends Controller
 
         return view('admin.brand.edit',compact('brand'));
     }
+
+    public function Update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'brand_name' => 'required|max:255',
+        ],[
+            'brand_name.required' => 'Please Input Brand Name',
+            'beand_name.max' => 'Category more Than 255Chars'
+
+        ]);
+        $old_image = $request->old_image;
+        $brand_image = $request->file('brand_image');
+        if($brand_image){
+            $name_gen = hexdec(uniqid());
+            $img_ext =  strtolower($brand_image->getClientOriginalExtension());
+
+            $img_name = $name_gen . '.' . $img_ext;
+            $up_location = 'image/brand/';
+            $last_img = $up_location . $img_name;
+            $brand_image->move($up_location, $img_name);
+
+            unlink($old_image);
+            Brand::find($id)->update([
+                'brand_name' => $validated['brand_name'],
+                'brand_image' => $last_img
+            ]);
+
+            return redirect()->back()->with('success', 'Brand updated successfully');
+        }
+
+        Brand::find($id)->update([
+            'brand_name' => $validated['brand_name']
+        ]);
+
+        return redirect()->back()->with('success', 'Brand updated successfully');
+
+
+    }
 }

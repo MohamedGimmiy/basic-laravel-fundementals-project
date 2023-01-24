@@ -15,8 +15,9 @@
                         <div class="card-header">Edit Brand</div>
                         <div class="card-body">
 
-                            <form action="{{url('brand/update/'. $brand->id)}}" method="POST">
+                            <form action="{{url('brand/update/'. $brand->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="old_image" value="{{$brand->brand_image}}" />
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Update Brand Name</label>
                                     <input name="brand_name" value="{{ $brand->brand_name }}" type="text" class="form-control" id="exampleInputEmail1"
