@@ -1,10 +1,5 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Edit Brand <b> </b>
-
-        </h2>
-    </x-slot>
+@extends('admin.admin_master')
+@section('admin')
 
     <div class="py-12">
         <div class="container">
@@ -12,6 +7,13 @@
 
                 <div class="col-md-8">
                     <div class="card">
+
+                        @if ($message = session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{$message}}
+                        </div>
+                        @endif
+
                         <div class="card-header">Edit Brand</div>
                         <div class="card-body">
 
@@ -52,4 +54,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

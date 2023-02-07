@@ -1,11 +1,6 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            All Brand <b> </b>
 
-        </h2>
-    </x-slot>
-
+@extends('admin.admin_master')
+@section('admin')
     <div class="py-12">
         <div class="container">
             <div class="row">
@@ -46,7 +41,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ url('brand/edit/' .$brand->id)}}" class="btn btn-info">Edit</a>
-                                        <a href="{{url('brand/delete/'.$brand->id)}}" class="btn btn-danger">Delete</a>
+                                        <a href="{{url('brand/delete/'.$brand->id)}}" onclick="confirm('Are you sure to delete?')" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -91,4 +86,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection
